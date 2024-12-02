@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptogram Converter</title>
+</head>
+<body>
+    <h1>Cryptogram Converter</h1>
+
+    <label for="textInput">Masukan Huruf :</label>
+    <input type="text" id="textInput" placeholder="Huruf">
+    <button onclick="sandikan()">Sandikan</button>
+    <p id="resultHuruf"></p>
+
+    <label for="numberInput"> Masukan Angka :</label>
+    <input type="text" id="numberInput" placeholder="Angka">
+    <button onclick="bukaSandi()">Buka Sandi</button>
+    <p id="resultAngka"></p>
+
+    <script>
+        const hurufKeAngkaArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        const angkaKeHurufArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170];
+
+
+        function sandikan() {
+            const inputText = document.getElementById("textInput").value.toUpperCase();
+            let result = '';
+
+            for (let i = 0; i < inputText.length; i++) {
+                const huruf = inputText[i];  
+                const indexHuruf = hurufKeAngkaArray.indexOf(huruf);  
+                if (indexHuruf !== -1) {
+                    result += angkaKeHurufArray[indexHuruf] + ' '; 
+                } else {
+                    result += '? '; 
+                }
+            }
+
+            document.getElementById("resultHuruf").textContent = "Hasil: " + result;
+        }
+
+        function bukaSandi() {
+            const inputNumber = document.getElementById("numberInput").value.split(" ");
+            let result = '';
+
+            inputNumber.forEach(num => {
+                const indexAngka = angkaKeHurufArray.indexOf(parseInt(num)); 
+                if (indexAngka !== -1) {
+                    result += hurufKeAngkaArray[indexAngka]; 
+                } else {
+                    result += '?'; 
+                }
+            });
+
+            document.getElementById("resultAngka").textContent = "Hasil: " + result;
+        }
+            
+
+        
+    </script>
+</body>
+</html>
